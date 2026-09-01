@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "studio": "prisma studio --port 5555",
+    "studio:prod": "echo 'Prisma Studio is disabled in production for security'"
+  }
+}

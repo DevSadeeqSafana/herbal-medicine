@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Public folder contents (large files)
+public/*
+!public/.gitignore
+
+# Environment files  
+.env
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+__MACOSX/
+
+# IDE
+.idea/
+.vscode/
+
+# Temp files
+*.tmp
+*.swp
+test/
+
+# Disposable working scripts and local-only DB safety backups — never meant
+# to be committed (may contain raw production data dumps).
+scratch/
+db-backups/
