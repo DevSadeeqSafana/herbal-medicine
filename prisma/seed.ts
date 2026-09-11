@@ -37,7 +37,7 @@ async function main() {
       description: 'A professional certificate curriculum for medical doctors, pharmacists, nurses, public health experts, researchers, naturopaths, and allied health professionals.',
       duration: '2 weeks',
       price: 450000,
-      imageUrl: '/images/programmes/2-week-advanced-certificate.jpg',
+      imageUrl: '/images/programmes/2-week-advanced-certificate.webp',
       curriculum: JSON.stringify([
         'Introduction to herbal medicine systems',
         'Herbal pharmacognosy and botany',
@@ -54,7 +54,7 @@ async function main() {
       description: 'A blended certificate programme for herbal practitioners, health workers, and community health educators with online learning and practical sessions.',
       duration: '4 weeks',
       price: 600000,
-      imageUrl: '/images/programmes/4-week-certificate.jpg',
+      imageUrl: '/images/programmes/4-week-certificate.webp',
       curriculum: JSON.stringify([
         'Introduction to Herbal Medicine and Indigenous Systems',
         'Medicinal Plants, Botany and Basic Herbal Preparations',
@@ -70,7 +70,7 @@ async function main() {
       description: 'A blended certificate programme designed to build advanced capacity in herbal medicine formulation, diagnostics, herbal pharmacology, and integrative primary health care using Nigerian indigenous knowledge systems.',
       duration: '3 months',
       price: 800000,
-      imageUrl: '/images/programmes/3-month-professional-certificate.jpg',
+      imageUrl: '/images/programmes/3-month-professional-certificate.webp',
       curriculum: JSON.stringify([
         'Foundations of Herbal Medicine',
         'Nigerian Herbal Heritage and Medicinal Plant Identification',
@@ -87,7 +87,7 @@ async function main() {
       description: 'A six-month professional herbal medicine course building field-ready practical capability, professional ethics, and clinical/public-health integration.',
       duration: '6 months',
       price: 1000000,
-      imageUrl: '/images/programmes/6-month-professional-course.jpg',
+      imageUrl: '/images/programmes/6-month-professional-course.webp',
       curriculum: JSON.stringify([
         'Scientific and cultural foundations of herbal medicine',
         'Herbal materia medica and plant use',
@@ -103,7 +103,7 @@ async function main() {
       description: 'An advanced professional programme that deepens herbal medicine practice, integrative treatment planning, research, entrepreneurship, and fieldwork leadership.',
       duration: '9 months',
       price: 1500000,
-      imageUrl: '/images/programmes/9-month-advanced-professional-course.jpg',
+      imageUrl: '/images/programmes/9-month-advanced-professional-course.webp',
       curriculum: JSON.stringify([
         'Advanced herbal pharmacology',
         'Clinical pharmacotherapy and case review',
@@ -119,7 +119,7 @@ async function main() {
       description: 'A four-week nursing-focused herbal medicine course for nursing students, nurses in practice, and healthcare professionals interested in complementary medicine.',
       duration: '4 weeks',
       price: 600000,
-      imageUrl: '/images/programmes/herbal-medicine-in-nursing.jpg',
+      imageUrl: '/images/programmes/herbal-medicine-in-nursing.webp',
       curriculum: JSON.stringify([
         'Introduction to Herbal Medicine in Nigeria',
         'Nigerian medicinal plants and preparation methods',

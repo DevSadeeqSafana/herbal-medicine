@@ -1,1 +1,1 @@
-{"version":1,"functions":{"/api/admin/enquiries":{},"/api/admin/programmes":{},"/api/admin/registrations":{},"/api/admin/payments":{},"/register":{},"/api/payment/verify":{},"/api/team":{},"/payment/verify":{},"/register/verify":{}}}
+{"version":1,"functions":{"/api/admin/registrations":{},"/api/admin/enquiries":{},"/api/admin/programmes":{},"/api/admin/payments":{},"/api/team":{},"/payment/verify":{},"/register/verify":{},"/register":{},"/api/payment/verify":{}}}

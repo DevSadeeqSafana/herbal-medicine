@@ -13,7 +13,7 @@ const slides = [
     subtitle: 'Certificate Course for Healthcare Professionals',
     description: 'A four-week nursing-focused herbal medicine programme covering indigenous plant knowledge, safety, evidence-based practice, and clinical integration.',
     icon: Leaf,
-    image: '/images/IMG-20260901-WA0009.jpg',
+    image: '/images/IMG-20260901-WA0009.webp',
     cta: { text: 'Learn More', link: '/about' },
   },
   {
@@ -22,7 +22,7 @@ const slides = [
     subtitle: 'Nigerian Herbal Medicine Practice',
     description: 'Develop capacity in formulation, diagnostics, pharmacology, toxicology, safety, and integrative primary health care.',
     icon: Users,
-    image: '/images/IMG-20260901-WA0007.jpg',
+    image: '/images/IMG-20260901-WA0007.webp',
     cta: { text: 'Register Now', link: '/register' },
   },
   {
@@ -31,7 +31,7 @@ const slides = [
     subtitle: '2, 4, 6 and 9 Month Learning Tracks',
     description: 'From 2-week professional refresher modules to 9-month advanced practice and enterprise pathways.',
     icon: BookOpen,
-    image: '/images/IMG-20260901-WA0002.jpg',
+    image: '/images/IMG-20260901-WA0002.webp',
     cta: { text: 'View Certificates', link: '/programmes' },
   },
 ];
