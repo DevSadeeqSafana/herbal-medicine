@@ -11,10 +11,10 @@ export default function AboutPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/wooden-spoons-with-plants-top-view.jpg"
-            alt="Herbal Medicine Background"
+            src="/images/IMG-20260901-WA0008.jpg"
+            alt="MOU signing event"
             fill
-            className="object-cover opacity-20"
+            className="object-cover opacity-30"
           />
         </div>
 
@@ -46,16 +46,17 @@ export default function AboutPage() {
             <AnimatedSection delay={0.2}>
               <div className="prose max-w-none">
                 <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-                  Cosmopolitan University Abuja is a premier institution of higher learning committed to
-                  academic excellence, innovation, and the holistic development of students. Established
-                  with a vision to provide world-class education, the university offers a diverse range
-                  of programmes across multiple disciplines.
+                  Cosmopolitan University Abuja is a university of higher learning focused on delivering
+                  practical, research-informed education for African healthcare and community development.
+                  Its partnership with Zee&apos;s Herbal Pharmacy expands the university&apos;s herbal medicine
+                  capacity through blended delivery, practical field learning, and Nigerian medicinal plant
+                  practice.
                 </p>
 
                 <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-                  Our herbal medicine programmes represent our commitment to preserving traditional
-                  knowledge while embracing modern scientific approaches. We believe in the power of
-                  integrative medicine and the important role herbal medicine plays in global healthcare.
+                  The herbal medicine courses emphasise indigenous knowledge systems, medicinal plant
+                  identification, formulation, safety, herbal pharmacology, modern evidence-based practice,
+                  and the integration of herbal medicine into primary healthcare and nursing practice.
                 </p>
               </div>
             </AnimatedSection>

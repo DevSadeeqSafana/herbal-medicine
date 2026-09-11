@@ -110,11 +110,11 @@ export default function ContactPage() {
                         <div>
                           <h3 className="font-semibold text-lg mb-1 text-gray-800">Address</h3>
                           <p className="text-gray-600">
-                            Cosmopolitan University
+                            Amma House, Plot 432, Yakubu J. Pam Street,
                             <br />
-                            Abuja, FCT
+                            Opposite National Hospital, Central Business District,
                             <br />
-                            Nigeria
+                            Abuja, Nigeria
                           </p>
                         </div>
                       </div>
@@ -131,9 +131,11 @@ export default function ContactPage() {
                         <div>
                           <h3 className="font-semibold text-lg mb-1 text-gray-800">Phone</h3>
                           <p className="text-gray-600">
-                            Main: +234 XXX XXX XXXX
+                            +234 806 559 0444
                             <br />
-                            Admissions: +234 XXX XXX XXXX
+                            +234 805 208 0828
+                            <br />
+                            +234 815 981 0601
                           </p>
                         </div>
                       </div>
@@ -150,9 +152,9 @@ export default function ContactPage() {
                         <div>
                           <h3 className="font-semibold text-lg mb-1 text-gray-800">Email</h3>
                           <p className="text-gray-600">
-                            General: info@cosmopolitanuni.edu.ng
+                            info@cosmopolitan.edu.ng
                             <br />
-                            Admissions: admissions@cosmopolitanuni.edu.ng
+                            Website: www.cosmopolitan.edu.ng
                           </p>
                         </div>
                       </div>

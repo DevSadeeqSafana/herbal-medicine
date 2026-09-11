@@ -7,7 +7,7 @@ export interface CredoPaymentData {
   transactionRef: string;
   email: string;
   callbackUrl: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface CredoPaymentResponse {
@@ -106,7 +106,7 @@ export async function verifyCredoPayment(
 ): Promise<{
   status: boolean;
   message: string;
-  data?: any;
+  data?: Record<string, unknown>;
 }> {
   try {
     const credoSecretKey = process.env.CREDO_SECRET_KEY;

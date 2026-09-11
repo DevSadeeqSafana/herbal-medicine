@@ -8,13 +8,27 @@ import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { registrationSchema } from '@/lib/validations';
 import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Loader2, CheckCircle, UserCircle, MapPin, GraduationCap, ShieldAlert } from 'lucide-react';
 import { decrypt } from '@/lib/crypto';
 import { formatCurrency } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
+
+type ExistingUserData = {
+  programmeId?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  dateOfBirth?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  qualification?: string;
+  institution?: string;
+};
 
 async function fetchProgrammes(): Promise<Programme[]> {
   const response = await fetch('/api/programmes');
@@ -23,15 +37,15 @@ async function fetchProgrammes(): Promise<Programme[]> {
 }
 
 export default function RegisterPage() {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const preSelectedProgrammeId = searchParams.get('programmeId');
+  const params = typeof window === 'undefined' ? new URLSearchParams('') : new URLSearchParams(window.location.search);
+  const preSelectedProgrammeId = params.get('programmeId');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1);
+  const currentStep = 1;
   const [verifiedEmail, setVerifiedEmail] = useState<string | null>(null);
   const [isCheckingVerification, setIsCheckingVerification] = useState(true);
-  const [existingUserData, setExistingUserData] = useState<any>(null);
+  const [existingUserData, setExistingUserData] = useState<ExistingUserData | null>(null);
   const [isLoadingExistingData, setIsLoadingExistingData] = useState(false);
 
   // Check for email verification cookie on mount
@@ -124,7 +138,7 @@ export default function RegisterPage() {
     queryFn: fetchProgrammes,
   });
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values: Record<string, unknown>) => {
     setIsSubmitting(true);
 
     try {
@@ -294,7 +308,7 @@ export default function RegisterPage() {
                 validationSchema={toFormikValidationSchema(registrationSchema)}
                 onSubmit={handleSubmit}
               >
-                {({ errors, touched, values, setFieldValue }) => (
+                {({ errors, touched, values }) => (
                   <Form className="space-y-6">
                     {/* Programme Selection */}
                     <div>

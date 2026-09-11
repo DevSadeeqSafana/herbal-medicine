@@ -73,15 +73,15 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-gray-300">
               <li className="flex items-start space-x-2">
                 <MapPin className="w-5 h-5 text-primary-400 flex-shrink-0 mt-0.5" />
-                <span>Cosmopolitan University, Abuja, Nigeria</span>
+                <span>Amma House, Plot 432, Yakubu J. Pam Street, Opposite National Hospital, CBD, Abuja</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="w-5 h-5 text-primary-400 flex-shrink-0" />
-                <span>+234 XXX XXX XXXX</span>
+                <span>+234 806 559 0444 | +234 805 208 0828 | +234 815 981 0601</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-5 h-5 text-primary-400 flex-shrink-0" />
-                <span>info@cosmopolitanuni.edu.ng</span>
+                <span>info@cosmopolitan.edu.ng</span>
               </li>
             </ul>
           </div>

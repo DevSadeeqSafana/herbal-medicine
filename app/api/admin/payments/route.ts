@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,7 +14,7 @@ export async function GET(request: NextRequest) {
     const startDate = searchParams.get('startDate');
     const endDate = searchParams.get('endDate');
 
-    const where: any = {};
+    const where: Prisma.PaymentWhereInput = {};
 
     // Filter by payment status
     if (status && status !== 'all') {
@@ -94,13 +95,14 @@ export async function GET(request: NextRequest) {
       data: payments,
       stats,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Failed to fetch payments';
     console.error('Error fetching payments:', error);
     return NextResponse.json(
       {
         success: false,
         message: 'Failed to fetch payments',
-        error: error.message,
+        error: message,
       },
       { status: 500 }
     );

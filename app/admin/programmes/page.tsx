@@ -158,7 +158,7 @@ export default function ProgrammesPage() {
     let curriculumModules: string[] = [];
     try {
       curriculumModules = JSON.parse(programme.curriculum || '[]');
-    } catch (e) {
+    } catch {
       curriculumModules = [];
     }
     setFormData({

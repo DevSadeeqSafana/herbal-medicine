@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { ShieldCheck, ArrowRight, Leaf, RefreshCw } from 'lucide-react';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
@@ -12,8 +12,8 @@ export const dynamicParams = true;
 
 export default function VerifyCodePage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const email = searchParams.get('email') || '';
+  const params = typeof window === 'undefined' ? new URLSearchParams('') : new URLSearchParams(window.location.search);
+  const email = params.get('email') || '';
 
   const [code, setCode] = useState(['', '', '', '', '', '']);
   const [loading, setLoading] = useState(false);

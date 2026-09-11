@@ -10,7 +10,6 @@ import {
   Edit,
   Trash2,
   CheckCircle,
-  XCircle,
   X,
   Menu,
   LogOut,
@@ -180,7 +179,13 @@ export default function AdminUsersPage() {
 
       const method = modalMode === 'create' ? 'POST' : 'PUT';
 
-      const payload: any = {
+      const payload: {
+        name: string;
+        email: string;
+        role: string;
+        isActive: boolean;
+        password?: string;
+      } = {
         name: formData.name,
         email: formData.email,
         role: formData.role,

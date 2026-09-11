@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { hashCode } from '@/lib/crypto';
 
 // GET - Fetch single admin
 export async function GET(

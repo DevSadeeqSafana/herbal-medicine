@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { hashCode } from '@/lib/crypto';
+import { Prisma } from '@prisma/client';
 
 // GET - Fetch all admin users (superadmin only)
 export async function GET(request: NextRequest) {
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const role = searchParams.get('role');
     const search = searchParams.get('search');
 
-    const where: any = {};
+    const where: Prisma.AdminWhereInput = {};
 
     if (isActive !== null && isActive !== 'all') {
       where.isActive = isActive === 'true';

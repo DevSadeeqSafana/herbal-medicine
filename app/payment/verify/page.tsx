@@ -1,7 +1,6 @@
 'use client';
 
 import MainLayout from '@/components/MainLayout';
-import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
@@ -11,12 +10,11 @@ export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 
 export default function PaymentVerifyPage() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const transactionRef = searchParams.get('ref');
+  const params = typeof window === 'undefined' ? new URLSearchParams('') : new URLSearchParams(window.location.search);
+  const transactionRef = params.get('ref');
 
   const [status, setStatus] = useState<'loading' | 'success' | 'failed'>('loading');
-  const [paymentData, setPaymentData] = useState<any>(null);
+  const [paymentData, setPaymentData] = useState<Record<string, unknown> | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {

@@ -2,45 +2,36 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
-import { Leaf, Award, Users, BookOpen } from 'lucide-react';
+import { Leaf, Users, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 const slides = [
   {
     id: 1,
-    title: 'Herbal Medicine Excellence',
-    subtitle: 'Transform Your Future with Ancient Wisdom',
-    description: 'Join our comprehensive herbal medicine programmes and become a certified practitioner',
+    title: 'Herbal Medicine in Nursing',
+    subtitle: 'Certificate Course for Healthcare Professionals',
+    description: 'A four-week nursing-focused herbal medicine programme covering indigenous plant knowledge, safety, evidence-based practice, and clinical integration.',
     icon: Leaf,
-    image: '/side-view-man-cleaning-plant-s-leaf.jpg',
-    cta: { text: 'Explore Programmes', link: '/programmes' },
-  },
-  {
-    id: 2,
-    title: 'Partnership with Zee\'s Herbal Pharmacy',
-    subtitle: '30+ Years of Herbal Excellence',
-    description: 'Learn from experienced practitioners with decades of real-world practice',
-    icon: Award,
-    image: '/set-wood-stubs-cup-tea-tea-herbs-bowls-dark-textured-background-flat-lay.jpg',
+    image: '/images/IMG-20260901-WA0009.jpg',
     cta: { text: 'Learn More', link: '/about' },
   },
   {
     id: 3,
-    title: 'Join 500+ Certified Graduates',
-    subtitle: 'Building Careers in Natural Medicine',
-    description: 'Our alumni practice across Nigeria and internationally',
+    title: 'Professional Certificate Pathway',
+    subtitle: 'Nigerian Herbal Medicine Practice',
+    description: 'Develop capacity in formulation, diagnostics, pharmacology, toxicology, safety, and integrative primary health care.',
     icon: Users,
-    image: '/rustic-table-adorned-with-fresh-herb-bouquet-generated-by-ai.jpg',
+    image: '/images/IMG-20260901-WA0007.jpg',
     cta: { text: 'Register Now', link: '/register' },
   },
   {
     id: 4,
-    title: 'Accredited Certificate Programmes',
-    subtitle: 'Recognized by National & International Bodies',
-    description: 'Receive certificates acknowledged by herbal medicine associations worldwide',
+    title: 'Blended Learning & MOU Delivery',
+    subtitle: '2, 4, 6 and 9 Month Learning Tracks',
+    description: 'From 2-week professional refresher modules to 9-month advanced practice and enterprise pathways.',
     icon: BookOpen,
-    image: '/natural-crushed-green-leaves-bowl.jpg',
+    image: '/images/IMG-20260901-WA0002.jpg',
     cta: { text: 'View Certificates', link: '/programmes' },
   },
 ];

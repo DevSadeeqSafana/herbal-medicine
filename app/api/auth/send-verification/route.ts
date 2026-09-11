@@ -42,11 +42,13 @@ export async function POST(request: NextRequest) {
       success: true,
       message: 'Verification code sent to your email',
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Send verification error:', error);
 
-    // Check for database connection errors
-    if (error.code === 'P1001' || error.message?.includes('Can\'t reach database')) {
+    const message = error instanceof Error ? error.message : 'An error occurred. Please try again.';
+    const databaseMessage = message.includes("Can't reach database") || message.includes('P1001');
+
+    if (databaseMessage) {
       return NextResponse.json(
         {
           success: false,
@@ -59,7 +61,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        message: error.message || 'An error occurred. Please try again.',
+        message,
       },
       { status: 500 }
     );

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 
 // GET - Fetch all team members (admin)
 export async function GET(request: NextRequest) {
@@ -8,7 +9,7 @@ export async function GET(request: NextRequest) {
     const isActive = searchParams.get('isActive');
     const search = searchParams.get('search');
 
-    const where: any = {};
+    const where: Prisma.TeamMemberWhereInput = {};
 
     if (isActive !== null && isActive !== 'all') {
       where.isActive = isActive === 'true';

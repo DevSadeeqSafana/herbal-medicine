@@ -3,15 +3,16 @@
 import { useEffect, useState } from 'react';
 import MainLayout from '@/components/MainLayout';
 import Image from 'next/image';
-import { Users, Mail, Phone, Linkedin, Twitter, Facebook, Sparkles } from 'lucide-react';
+import { Users, Mail, Phone, Linkedin, Twitter, Facebook, Sparkles, X, Eye } from 'lucide-react';
 import { TeamMember } from '@/types';
-import { motion, Variants } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 export default function TeamPage() {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
 
   const [introRef, introInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [gridRef, gridInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -99,7 +100,7 @@ export default function TeamPage() {
 
         <div className="absolute inset-0 z-0">
           <Image
-            src="/wooden-spoons-with-plants-top-view.jpg"
+            src="/images/IMG-20260901-WA0008.jpg"
             alt="Herbal Medicine Background"
             fill
             className="object-cover opacity-15"
@@ -243,146 +244,251 @@ export default function TeamPage() {
               </p>
             </motion.div>
           ) : (
-            <motion.div
-              ref={gridRef}
-              variants={containerVariants}
-              initial="hidden"
-              animate={gridInView ? 'visible' : 'hidden'}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
-            >
-              {teamMembers.map((member) => (
-                <motion.div
-                  key={member.id}
-                  variants={cardVariants}
-                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                  onHoverStart={() => setHoveredCard(member.id)}
-                  onHoverEnd={() => setHoveredCard(null)}
-                  className="relative"
-                >
-                  <div className={`card p-6 text-center h-full flex flex-col transition-shadow duration-300 ${
-                    hoveredCard === member.id ? 'shadow-xl shadow-primary-200/50' : ''
-                  }`}>
-                    {/* Profile Image */}
-                    <motion.div
-                      className="relative w-32 h-32 mx-auto mb-4"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: 'spring', stiffness: 300 }}
-                    >
-                      {member.imageUrl ? (
-                        <Image
-                          src={member.imageUrl}
-                          alt={member.name}
-                          fill
-                          className="rounded-full object-cover border-4 border-primary-100"
-                        />
-                      ) : (
-                        <div className="w-full h-full rounded-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center border-4 border-primary-200">
-                          <span className="text-4xl font-bold text-primary-600">
-                            {member.name.charAt(0).toUpperCase()}
-                          </span>
-                        </div>
-                      )}
-                      {/* Hover ring effect */}
+            <>
+              <motion.div
+                ref={gridRef}
+                variants={containerVariants}
+                initial="hidden"
+                animate={gridInView ? 'visible' : 'hidden'}
+                className={teamMembers.length === 1 ? 'flex justify-center' : 'grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto'}
+              >
+                {teamMembers.map((member) => (
+                  <motion.div
+                    key={member.id}
+                    variants={cardVariants}
+                    whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                    onHoverStart={() => setHoveredCard(member.id)}
+                    onHoverEnd={() => setHoveredCard(null)}
+                    className={teamMembers.length === 1 ? 'w-full max-w-md' : 'relative'}
+                  >
+                    <div className={`card p-6 text-center h-full flex flex-col transition-shadow duration-300 ${
+                      hoveredCard === member.id ? 'shadow-xl shadow-primary-200/50' : ''
+                    } ${teamMembers.length === 1 ? 'mx-auto' : ''}`}>
+                      {/* Profile Image */}
                       <motion.div
-                        className="absolute inset-0 rounded-full border-4 border-primary-400"
-                        initial={{ opacity: 0, scale: 1.1 }}
-                        animate={hoveredCard === member.id ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.1 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </motion.div>
-
-                    {/* Name & Title */}
-                    <h3 className="font-bold text-xl text-gray-800 mb-1">{member.name}</h3>
-                    <p className="text-primary-600 font-medium mb-2">{member.title}</p>
-
-                    {/* Department */}
-                    {member.department && (
-                      <motion.p
-                        className="text-sm text-gray-500 mb-3 inline-block"
-                        initial={{ opacity: 0.7 }}
-                        whileHover={{ opacity: 1 }}
+                        className="relative w-32 h-32 mx-auto mb-4"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ type: 'spring', stiffness: 300 }}
                       >
-                        <span className="bg-primary-50 px-3 py-1 rounded-full">
-                          {member.department}
-                        </span>
-                      </motion.p>
-                    )}
+                        {member.imageUrl ? (
+                          <Image
+                            src={member.imageUrl}
+                            alt={member.name}
+                            fill
+                            className="rounded-full object-cover border-4 border-primary-100"
+                          />
+                        ) : (
+                          <div className="w-full h-full rounded-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center border-4 border-primary-200">
+                            <span className="text-4xl font-bold text-primary-600">
+                              {member.name.charAt(0).toUpperCase()}
+                            </span>
+                          </div>
+                        )}
+                        {/* Hover ring effect */}
+                        <motion.div
+                          className="absolute inset-0 rounded-full border-4 border-primary-400"
+                          initial={{ opacity: 0, scale: 1.1 }}
+                          animate={hoveredCard === member.id ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.1 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </motion.div>
 
-                    {/* Bio */}
-                    {member.bio && (
-                      <p className="text-gray-600 text-sm mb-4 flex-grow line-clamp-3">{member.bio}</p>
-                    )}
+                      {/* Name & Title */}
+                      <h3 className="font-bold text-xl text-gray-800 mb-1">{member.name}</h3>
+                      <p className="text-primary-600 font-medium mb-2">{member.title}</p>
 
-                    {/* Contact & Social Links */}
-                    <div className="mt-auto pt-4 border-t border-gray-100">
-                      <div className="flex justify-center gap-3">
-                        {member.email && (
-                          <motion.a
-                            href={`mailto:${member.email}`}
-                            className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-primary-100 hover:text-primary-600 transition-colors"
-                            title="Email"
-                            whileHover={{ scale: 1.15, rotate: 5 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <Mail className="w-5 h-5" />
-                          </motion.a>
-                        )}
-                        {member.phone && (
-                          <motion.a
-                            href={`tel:${member.phone}`}
-                            className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-primary-100 hover:text-primary-600 transition-colors"
-                            title="Phone"
-                            whileHover={{ scale: 1.15, rotate: -5 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <Phone className="w-5 h-5" />
-                          </motion.a>
-                        )}
-                        {member.linkedin && (
-                          <motion.a
-                            href={member.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors"
-                            title="LinkedIn"
-                            whileHover={{ scale: 1.15, rotate: 5 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <Linkedin className="w-5 h-5" />
-                          </motion.a>
-                        )}
-                        {member.twitter && (
-                          <motion.a
-                            href={member.twitter}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-sky-100 hover:text-sky-500 transition-colors"
-                            title="Twitter"
-                            whileHover={{ scale: 1.15, rotate: -5 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <Twitter className="w-5 h-5" />
-                          </motion.a>
-                        )}
-                        {member.facebook && (
-                          <motion.a
-                            href={member.facebook}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-700 transition-colors"
-                            title="Facebook"
-                            whileHover={{ scale: 1.15, rotate: 5 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <Facebook className="w-5 h-5" />
-                          </motion.a>
-                        )}
+                      {/* Department */}
+                      {member.department && (
+                        <motion.p
+                          className="text-sm text-gray-500 mb-3 inline-block"
+                          initial={{ opacity: 0.7 }}
+                          whileHover={{ opacity: 1 }}
+                        >
+                          <span className="bg-primary-50 px-3 py-1 rounded-full">
+                            {member.department}
+                          </span>
+                        </motion.p>
+                      )}
+
+                      {/* Bio */}
+                      {member.bio && (
+                        <p className="text-gray-600 text-sm mb-4 flex-grow line-clamp-3">{member.bio}</p>
+                      )}
+
+                      {/* Contact & Social Links */}
+                      <div className="mt-auto pt-4 border-t border-gray-100">
+                        <div className="flex justify-center gap-3">
+                          {member.email && (
+                            <motion.a
+                              href={`mailto:${member.email}`}
+                              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-primary-100 hover:text-primary-600 transition-colors"
+                              title="Email"
+                              whileHover={{ scale: 1.15, rotate: 5 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <Mail className="w-5 h-5" />
+                            </motion.a>
+                          )}
+                          {member.phone && (
+                            <motion.a
+                              href={`tel:${member.phone}`}
+                              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-primary-100 hover:text-primary-600 transition-colors"
+                              title="Phone"
+                              whileHover={{ scale: 1.15, rotate: -5 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <Phone className="w-5 h-5" />
+                            </motion.a>
+                          )}
+                          {member.linkedin && (
+                            <motion.a
+                              href={member.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors"
+                              title="LinkedIn"
+                              whileHover={{ scale: 1.15, rotate: 5 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <Linkedin className="w-5 h-5" />
+                            </motion.a>
+                          )}
+                          {member.twitter && (
+                            <motion.a
+                              href={member.twitter}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-sky-100 hover:text-sky-500 transition-colors"
+                              title="Twitter"
+                              whileHover={{ scale: 1.15, rotate: -5 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <Twitter className="w-5 h-5" />
+                            </motion.a>
+                          )}
+                          {member.facebook && (
+                            <motion.a
+                              href={member.facebook}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-700 transition-colors"
+                              title="Facebook"
+                              whileHover={{ scale: 1.15, rotate: 5 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <Facebook className="w-5 h-5" />
+                            </motion.a>
+                          )}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setSelectedMember(member)}
+                          className="mt-4 inline-flex items-center gap-2 rounded-full bg-primary-700 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-800 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500/60"
+                        >
+                          <Eye className="w-4 h-4" />
+                          View Profile
+                        </button>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              <AnimatePresence>
+                {selectedMember && (
+                  <motion.div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-3 py-3"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <motion.div
+                      className="relative w-[min(96vw,1400px)] max-h-[96vh] rounded-3xl bg-white shadow-2xl overflow-hidden"
+                      initial={{ opacity: 0, y: 30, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 20, scale: 0.98 }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setSelectedMember(null)}
+                        className="absolute right-4 top-4 z-10 rounded-full bg-white/90 p-2 text-gray-700 shadow-sm transition hover:bg-primary-50 hover:text-primary-700"
+                        aria-label="Close profile"
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+
+                      <div className="grid md:grid-cols-[240px_1fr] max-h-[96vh]">
+                        <div className="bg-gradient-to-br from-primary-700 to-primary-900 p-8 flex flex-col items-center justify-center text-white min-h-[280px]">
+                          {selectedMember.imageUrl ? (
+                            <div className="relative w-40 h-40 mb-4">
+                              <Image
+                                src={selectedMember.imageUrl}
+                                alt={selectedMember.name}
+                                fill
+                                className="rounded-full object-cover border-4 border-white/80"
+                              />
+                            </div>
+                          ) : (
+                            <div className="w-40 h-40 rounded-full bg-white/20 border-4 border-white/80 flex items-center justify-center text-5xl font-bold">
+                              {selectedMember.name.charAt(0).toUpperCase()}
+                            </div>
+                          )}
+                          <span className="text-sm font-semibold uppercase tracking-wide">Team Member</span>
+                        </div>
+
+                        <div className="p-8 min-w-0 flex flex-col max-h-[96vh] overflow-hidden">
+                          <div className="mb-4 flex-shrink-0">
+                            <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary-600">{selectedMember.department || 'Faculty Member'}</p>
+                            <h3 className="mt-2 text-3xl font-bold text-gray-900 break-words">{selectedMember.name}</h3>
+                            <p className="mt-2 text-lg font-semibold text-primary-700">{selectedMember.title}</p>
+                          </div>
+
+                          {selectedMember.bio && (
+                            <div className="mb-5 rounded-2xl bg-primary-50 p-4 flex-1 min-h-0 overflow-y-auto">
+                              <p className="text-sm leading-7 text-gray-700 whitespace-pre-line">{selectedMember.bio}</p>
+                            </div>
+                          )}
+
+                          <div className="space-y-3 text-sm text-gray-700 flex-shrink-0">
+                            {selectedMember.email && (
+                              <div className="flex items-center gap-3">
+                                <Mail className="w-4 h-4 text-primary-700" />
+                                <a href={`mailto:${selectedMember.email}`} className="hover:text-primary-700">{selectedMember.email}</a>
+                              </div>
+                            )}
+                            {selectedMember.phone && (
+                              <div className="flex items-center gap-3">
+                                <Phone className="w-4 h-4 text-primary-700" />
+                                <a href={`tel:${selectedMember.phone}`} className="hover:text-primary-700">{selectedMember.phone}</a>
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="mt-6 flex flex-wrap gap-3 flex-shrink-0">
+                            {selectedMember.linkedin && (
+                              <a href={selectedMember.linkedin} target="_blank" rel="noopener noreferrer" className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                                LinkedIn
+                              </a>
+                            )}
+                            {selectedMember.twitter && (
+                              <a href={selectedMember.twitter} target="_blank" rel="noopener noreferrer" className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-sky-50 hover:text-sky-500">
+                                Twitter
+                              </a>
+                            )}
+                            {selectedMember.facebook && (
+                              <a href={selectedMember.facebook} target="_blank" rel="noopener noreferrer" className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-700">
+                                Facebook
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </>
           )}
         </div>
       </section>
