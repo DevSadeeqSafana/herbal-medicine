@@ -9,12 +9,20 @@ import { formatCurrency } from '@/lib/utils';
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 
+interface PaymentVerificationData {
+  status: string;
+  amount: number;
+  transactionRef: string;
+  programmeName: string;
+  studentName: string;
+}
+
 export default function PaymentVerifyPage() {
   const params = typeof window === 'undefined' ? new URLSearchParams('') : new URLSearchParams(window.location.search);
   const transactionRef = params.get('ref');
 
   const [status, setStatus] = useState<'loading' | 'success' | 'failed'>('loading');
-  const [paymentData, setPaymentData] = useState<Record<string, unknown> | null>(null);
+  const [paymentData, setPaymentData] = useState<PaymentVerificationData | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {

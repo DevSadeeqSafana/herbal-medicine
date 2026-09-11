@@ -31,14 +31,14 @@ export async function GET(request: NextRequest) {
     // Search by transaction reference, student name, or email
     if (search) {
       where.OR = [
-        { transactionRef: { contains: search, mode: 'insensitive' } },
-        { credoRef: { contains: search, mode: 'insensitive' } },
+        { transactionRef: { contains: search } },
+        { credoRef: { contains: search } },
         {
           registration: {
             OR: [
-              { firstName: { contains: search, mode: 'insensitive' } },
-              { lastName: { contains: search, mode: 'insensitive' } },
-              { email: { contains: search, mode: 'insensitive' } },
+              { firstName: { contains: search } },
+              { lastName: { contains: search } },
+              { email: { contains: search } },
             ],
           },
         },
@@ -46,17 +46,17 @@ export async function GET(request: NextRequest) {
     }
 
     // Filter by date range
+    const createdAtFilter: Prisma.DateTimeFilter = {};
+
     if (startDate) {
-      where.createdAt = {
-        ...where.createdAt,
-        gte: new Date(startDate),
-      };
+      createdAtFilter.gte = new Date(startDate);
     }
     if (endDate) {
-      where.createdAt = {
-        ...where.createdAt,
-        lte: new Date(endDate),
-      };
+      createdAtFilter.lte = new Date(endDate);
+    }
+
+    if (startDate || endDate) {
+      where.createdAt = createdAtFilter;
     }
 
     const payments = await prisma.payment.findMany({

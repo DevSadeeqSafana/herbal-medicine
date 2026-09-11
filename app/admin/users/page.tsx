@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import {
@@ -99,13 +99,7 @@ export default function AdminUsersPage() {
     }
   }, [router]);
 
-  useEffect(() => {
-    if (admin && admin.role === 'superadmin') {
-      fetchAdminUsers();
-    }
-  }, [search, statusFilter, roleFilter, admin]);
-
-  const fetchAdminUsers = async () => {
+  const fetchAdminUsers = useCallback(async () => {
     try {
       const params = new URLSearchParams();
       if (statusFilter !== 'all') {
@@ -130,7 +124,13 @@ export default function AdminUsersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [search, statusFilter, roleFilter]);
+
+  useEffect(() => {
+    if (admin && admin.role === 'superadmin') {
+      fetchAdminUsers();
+    }
+  }, [admin, fetchAdminUsers]);
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');

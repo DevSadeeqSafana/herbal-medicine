@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { hashCode } from '@/lib/crypto';
 import { Prisma } from '@prisma/client';
 
 // GET - Fetch all admin users (superadmin only)
@@ -22,8 +23,8 @@ export async function GET(request: NextRequest) {
 
     if (search) {
       where.OR = [
-        { name: { contains: search, mode: 'insensitive' } },
-        { email: { contains: search, mode: 'insensitive' } },
+        { name: { contains: search } },
+        { email: { contains: search } },
       ];
     }
 

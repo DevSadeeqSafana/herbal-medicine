@@ -20,15 +20,7 @@ export default function VerifyCodePage() {
   const [resending, setResending] = useState(false);
   const [attemptsRemaining, setAttemptsRemaining] = useState<number | null>(null);
 
-  // Refs for each input box
-  const inputRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   // Redirect to email page if no email provided
   useEffect(() => {
@@ -39,7 +31,7 @@ export default function VerifyCodePage() {
 
   // Focus first input on mount
   useEffect(() => {
-    inputRefs[0].current?.focus();
+    inputRefs.current[0]?.focus();
   }, []);
 
   const handleChange = (index: number, value: string) => {
@@ -54,22 +46,22 @@ export default function VerifyCodePage() {
 
     // Auto-focus next input
     if (value && index < 5) {
-      inputRefs[index + 1].current?.focus();
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
   const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     // Handle backspace
     if (e.key === 'Backspace' && !code[index] && index > 0) {
-      inputRefs[index - 1].current?.focus();
+      inputRefs.current[index - 1]?.focus();
     }
 
     // Handle left/right arrow keys
     if (e.key === 'ArrowLeft' && index > 0) {
-      inputRefs[index - 1].current?.focus();
+      inputRefs.current[index - 1]?.focus();
     }
     if (e.key === 'ArrowRight' && index < 5) {
-      inputRefs[index + 1].current?.focus();
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
@@ -81,7 +73,7 @@ export default function VerifyCodePage() {
     if (/^\d{6}$/.test(pastedData)) {
       const newCode = pastedData.split('');
       setCode(newCode);
-      inputRefs[5].current?.focus();
+      inputRefs.current[5]?.focus();
     }
   };
 
@@ -126,7 +118,7 @@ export default function VerifyCodePage() {
 
         // Clear the code inputs
         setCode(['', '', '', '', '', '']);
-        inputRefs[0].current?.focus();
+        inputRefs.current[0]?.focus();
       }
     } catch (error) {
       console.error('Error verifying code:', error);
@@ -156,7 +148,7 @@ export default function VerifyCodePage() {
         toast.success('New verification code sent!');
         setCode(['', '', '', '', '', '']);
         setAttemptsRemaining(null);
-        inputRefs[0].current?.focus();
+        inputRefs.current[0]?.focus();
       } else {
         toast.error(data.message || 'Failed to resend code');
       }
@@ -214,7 +206,9 @@ export default function VerifyCodePage() {
                 {code.map((digit, index) => (
                   <input
                     key={index}
-                    ref={inputRefs[index]}
+                    ref={(input) => {
+                      inputRefs.current[index] = input;
+                    }}
                     type="text"
                     inputMode="numeric"
                     maxLength={1}
