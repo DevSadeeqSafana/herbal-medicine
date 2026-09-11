@@ -58,7 +58,7 @@ export default function Home() {
               <div className="card p-8 border-t-4 border-primary-600 hover-glow">
                 <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
                   <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
-                    <Image src="/images/IMG-20260901-WA0008.jpg" alt="MOU signing ceremony" fill className="object-cover" />
+                    <Image src="/images/IMG-20260901-WA0008.webp" alt="MOU signing ceremony" fill className="object-cover" />
                   </div>
                   <div className="prose max-w-none">
                     <p className="text-gray-700 mb-4 leading-relaxed">
@@ -102,7 +102,7 @@ export default function Home() {
                 <AnimatedSection direction="left" delay={0.2}>
                   <div className="card p-0 hover-scale overflow-hidden">
                     <div className="relative h-64">
-                      <Image src="/images/IMG-20260901-WA0009.jpg" alt="Herbal Medicine Event" fill className="object-cover" />
+                      <Image src="/images/IMG-20260901-WA0009.webp" alt="Herbal Medicine Event" fill className="object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     </div>
                     <div className="p-6">
@@ -118,7 +118,7 @@ export default function Home() {
                 <AnimatedSection direction="right" delay={0.3}>
                   <div className="card p-0 hover-scale overflow-hidden">
                     <div className="relative h-64">
-                      <Image src="/images/IMG-20260901-WA0007.jpg" alt="Herbal Research" fill className="object-cover" />
+                      <Image src="/images/IMG-20260901-WA0007.webp" alt="Herbal Research" fill className="object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     </div>
                     <div className="p-6">

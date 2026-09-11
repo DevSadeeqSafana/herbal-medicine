@@ -100,7 +100,7 @@ export default function TeamPage() {
 
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/IMG-20260901-WA0008.jpg"
+            src="/images/IMG-20260901-WA0008.webp"
             alt="Herbal Medicine Background"
             fill
             className="object-cover opacity-15"

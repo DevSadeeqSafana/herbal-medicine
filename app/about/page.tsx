@@ -11,7 +11,7 @@ export default function AboutPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/IMG-20260901-WA0008.jpg"
+            src="/images/IMG-20260901-WA0008.webp"
             alt="MOU signing event"
             fill
             className="object-cover opacity-30"
