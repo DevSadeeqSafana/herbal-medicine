@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Programme } from '@/types';
 import { Clock, DollarSign, BookOpen, Leaf, CheckCircle, Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { parseCurriculum } from '@/lib/curriculum';
 
@@ -74,8 +75,15 @@ export default function ProgrammeDetailPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16">
-        <div className="container mx-auto px-4">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16">
+        {programme.imageUrl && (
+          <>
+            <Image src={programme.imageUrl} alt="" fill priority sizes="100vw" className="object-cover" />
+            {/* Keeps the white hero text readable over the photo */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-800/90 to-primary-900/80" />
+          </>
+        )}
+        <div className="relative container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="flex justify-center mb-6">
               <Leaf className="w-16 h-16 text-primary-200" />

@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Programme } from '@/types';
 import { Clock, DollarSign, BookOpen, Leaf, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { parseCurriculum } from '@/lib/curriculum';
 
 async function fetchProgrammes(): Promise<Programme[]> {
@@ -21,9 +22,21 @@ function ProgrammeCard({ programme }: { programme: Programme }) {
 
   return (
     <div className="card">
-      <div className="h-48 bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
-        <Leaf className="w-20 h-20 text-white opacity-80" />
-      </div>
+      {programme.imageUrl ? (
+        <div className="relative h-48">
+          <Image
+            src={programme.imageUrl}
+            alt={programme.name}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className="object-cover"
+          />
+        </div>
+      ) : (
+        <div className="h-48 bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
+          <Leaf className="w-20 h-20 text-white opacity-80" />
+        </div>
+      )}
       <div className="p-6">
         <h3 className="text-xl font-bold text-gray-800 mb-3">{programme.name}</h3>
         <p className="text-gray-600 mb-4 line-clamp-3">{programme.description}</p>
