@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -16,6 +16,7 @@ model Programme {
   description String
   duration    String   // e.g., "6 months", "1 year"
   price       Float
+  priceUsd    Float?   // fee for international candidates, in US dollars
   imageUrl    String?
   curriculum  String   // JSON stringified array of course modules
   startDate   DateTime?

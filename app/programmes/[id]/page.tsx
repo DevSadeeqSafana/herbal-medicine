@@ -6,6 +6,7 @@ import { Programme } from '@/types';
 import { Clock, DollarSign, BookOpen, Leaf, CheckCircle, Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { parseCurriculum } from '@/lib/curriculum';
 
 async function fetchProgramme(id: string): Promise<Programme> {
   const response = await fetch(`/api/programmes/${id}`);
@@ -55,7 +56,7 @@ export default function ProgrammeDetailPage() {
     );
   }
 
-  const curriculum = JSON.parse(programme.curriculum) as string[];
+  const curriculum = parseCurriculum(programme.curriculum);
 
   return (
     <MainLayout>
@@ -96,6 +97,9 @@ export default function ProgrammeDetailPage() {
                 <DollarSign className="w-8 h-8 mx-auto mb-2" />
                 <div className="text-sm text-primary-100">Programme Fee</div>
                 <div className="font-semibold text-lg">₦{programme.price.toLocaleString()}</div>
+                {programme.priceUsd != null && (
+                  <div className="text-sm text-primary-100">${programme.priceUsd.toLocaleString()} for international candidates</div>
+                )}
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
                 <BookOpen className="w-8 h-8 mx-auto mb-2" />

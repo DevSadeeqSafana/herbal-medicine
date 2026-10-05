@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Programme } from '@/types';
 import { Clock, DollarSign, BookOpen, Leaf, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { parseCurriculum } from '@/lib/curriculum';
 
 async function fetchProgrammes(): Promise<Programme[]> {
   const response = await fetch('/api/programmes');
@@ -16,7 +17,7 @@ async function fetchProgrammes(): Promise<Programme[]> {
 }
 
 function ProgrammeCard({ programme }: { programme: Programme }) {
-  const curriculum = JSON.parse(programme.curriculum) as string[];
+  const curriculum = parseCurriculum(programme.curriculum);
 
   return (
     <div className="card">
@@ -36,6 +37,9 @@ function ProgrammeCard({ programme }: { programme: Programme }) {
             <DollarSign className="w-5 h-5 text-primary-600 mr-2" />
             <span className="text-sm font-semibold">
               ₦{programme.price.toLocaleString()}
+              {programme.priceUsd != null && (
+                <span className="font-normal text-gray-500"> · ${programme.priceUsd.toLocaleString()} international</span>
+              )}
             </span>
           </div>
           <div className="flex items-center text-gray-700">

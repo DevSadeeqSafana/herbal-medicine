@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { serializeCurriculum } from '@/lib/curriculum';
 
 export async function GET(
   request: NextRequest,
@@ -60,6 +61,7 @@ export async function PUT(
       description,
       duration,
       price,
+      priceUsd,
       curriculum,
       startDate,
       endDate,
@@ -74,7 +76,8 @@ export async function PUT(
         description,
         duration,
         price: price ? parseFloat(price) : undefined,
-        curriculum: curriculum ? JSON.stringify(curriculum) : undefined,
+        priceUsd: priceUsd === undefined ? undefined : priceUsd === null || priceUsd === '' ? null : parseFloat(priceUsd),
+        curriculum: curriculum !== undefined ? serializeCurriculum(curriculum) : undefined,
         startDate: startDate ? new Date(startDate) : null,
         endDate: endDate ? new Date(endDate) : null,
         imageUrl,

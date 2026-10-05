@@ -23,6 +23,7 @@ import {
   List,
   MessageSquare,
 } from 'lucide-react';
+import { parseCurriculum } from '@/lib/curriculum';
 
 interface Programme {
   id: string;
@@ -30,6 +31,7 @@ interface Programme {
   description: string;
   duration: string;
   price: number;
+  priceUsd: number | null;
   curriculum: string;
   startDate: string | null;
   endDate: string | null;
@@ -64,6 +66,7 @@ export default function ProgrammesPage() {
     description: '',
     duration: '',
     price: '',
+    priceUsd: '',
     startDate: '',
     endDate: '',
     isActive: true,
@@ -144,6 +147,7 @@ export default function ProgrammesPage() {
       description: '',
       duration: '',
       price: '',
+      priceUsd: '',
       startDate: '',
       endDate: '',
       isActive: true,
@@ -155,17 +159,13 @@ export default function ProgrammesPage() {
   const openEditModal = (programme: Programme) => {
     setModalMode('edit');
     setSelectedProgramme(programme);
-    let curriculumModules: string[] = [];
-    try {
-      curriculumModules = JSON.parse(programme.curriculum || '[]');
-    } catch {
-      curriculumModules = [];
-    }
+    const curriculumModules = parseCurriculum(programme.curriculum);
     setFormData({
       name: programme.name,
       description: programme.description,
       duration: programme.duration,
       price: programme.price.toString(),
+      priceUsd: programme.priceUsd != null ? programme.priceUsd.toString() : '',
       startDate: programme.startDate ? programme.startDate.split('T')[0] : '',
       endDate: programme.endDate ? programme.endDate.split('T')[0] : '',
       isActive: programme.isActive,
@@ -213,6 +213,7 @@ export default function ProgrammesPage() {
           description: formData.description,
           duration: formData.duration,
           price: parseFloat(formData.price),
+          priceUsd: formData.priceUsd !== '' ? parseFloat(formData.priceUsd) : null,
           startDate: formData.startDate || null,
           endDate: formData.endDate || null,
           isActive: formData.isActive,
@@ -536,6 +537,9 @@ export default function ProgrammesPage() {
                         </td>
                         <td className="px-6 py-4 text-sm font-medium text-gray-900">
                           {formatCurrency(programme.price)}
+                          {programme.priceUsd != null && (
+                            <div className="text-xs text-gray-500">${programme.priceUsd.toLocaleString()} international</div>
+                          )}
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-900">
                           <div className="flex items-center gap-1">
@@ -674,6 +678,21 @@ export default function ProgrammesPage() {
                       placeholder="150000"
                     />
                   </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Price for International Candidates (USD)
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={formData.priceUsd}
+                    onChange={(e) => setFormData({ ...formData, priceUsd: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="500 (leave empty if not offered)"
+                  />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">

@@ -4,6 +4,7 @@ export interface Programme {
   description: string;
   duration: string;
   price: number;
+  priceUsd: number | null;
   imageUrl: string | null;
   curriculum: string;
   startDate: Date | null;

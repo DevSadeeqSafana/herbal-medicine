@@ -1,9 +1,19 @@
 # Dependencies
 node_modules/
 
+# Next.js build output
+.next/
+out/
+tsconfig.tsbuildinfo
+
+# Local SQLite databases (the app uses PostgreSQL via DATABASE_URL)
+prisma/**/*.db
+prisma/**/*.db-journal
+
 # Public folder contents (large files)
 public/*
 !public/.gitignore
+!public/images/
 
 # Environment files  
 .env

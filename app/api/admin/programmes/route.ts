@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+import { serializeCurriculum } from '@/lib/curriculum';
 
 export const dynamic = 'force-dynamic';
 
@@ -77,6 +78,7 @@ export async function POST(request: NextRequest) {
       description,
       duration,
       price,
+      priceUsd,
       curriculum,
       startDate,
       endDate,
@@ -102,7 +104,8 @@ export async function POST(request: NextRequest) {
         description,
         duration,
         price: parseFloat(price),
-        curriculum: JSON.stringify(curriculum || []),
+        priceUsd: priceUsd !== undefined && priceUsd !== null && priceUsd !== '' ? parseFloat(priceUsd) : null,
+        curriculum: serializeCurriculum(curriculum),
         startDate: startDate ? new Date(startDate) : null,
         endDate: endDate ? new Date(endDate) : null,
         imageUrl: imageUrl || null,

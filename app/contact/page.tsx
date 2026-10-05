@@ -131,11 +131,11 @@ export default function ContactPage() {
                         <div>
                           <h3 className="font-semibold text-lg mb-1 text-gray-800">Phone</h3>
                           <p className="text-gray-600">
-                            +234 806 559 0444
+                            +234 803 332 8656
                             <br />
-                            +234 805 208 0828
+                            +234 802 345 5669
                             <br />
-                            +234 815 981 0601
+                            +234 808 862 4230
                           </p>
                         </div>
                       </div>
